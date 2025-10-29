@@ -1,6 +1,6 @@
 import type { NodeType, TreeNode } from "@/types/json-tree";
 
-export const parseJsonToTree = (jsonData: any, path = "root"): TreeNode => {
+export const parseJsonToTree = (jsonData: any, path = "$"): TreeNode => {
   const getNodeType = (value: any): NodeType => {
     if (value === null || value === undefined) return "primitive";
     if (Array.isArray(value)) return "array";
@@ -69,4 +69,20 @@ export const validateJson = (
       error: error instanceof Error ? error.message : "Invalid JSON",
     };
   }
+};
+
+export const findNodeByPath = (
+  tree: TreeNode,
+  searchPath: string
+): TreeNode | null => {
+  if (tree.path === searchPath) return tree;
+
+  if (tree.children) {
+    for (const child of tree.children) {
+      const found = findNodeByPath(child, searchPath);
+      if (found) return found;
+    }
+  }
+
+  return null;
 };

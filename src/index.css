@@ -64,7 +64,7 @@
   }
 
 
-    .bg-nodeObject {
+  .bg-nodeObject {
     @apply bg-[rgb(var(--node-object))];
   }
   .bg-nodeArray {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ReactFlow, {
   Background,
   Controls,
@@ -10,6 +10,9 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import type { FlowNode, FlowEdge } from "@/types/json-tree";
 import { CustomNode } from "./CustomNode";
+import { Download } from "lucide-react";
+import { toast } from "sonner";
+import { toPng } from "html-to-image";
 
 interface TreeVisualizerProps {
   nodes: FlowNode[];
@@ -32,6 +35,33 @@ const TreeVisualizerContent = ({ nodes, edges }: TreeVisualizerProps) => {
   useEffect(() => {
     setEdgesState(edges);
   }, [edges, setEdgesState]);
+
+  const onDownloadImage = () => {
+    const viewport = reactFlowWrapper.current?.querySelector(
+      ".react-flow__viewport"
+    );
+
+    if (!viewport) {
+      toast.error("Unable to capture tree");
+      return;
+    }
+
+    toPng(viewport as HTMLElement, {
+      backgroundColor: "#ffffff",
+      width: (viewport as HTMLElement).offsetWidth,
+      height: (viewport as HTMLElement).offsetHeight,
+    })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "json-tree.png";
+        link.href = dataUrl;
+        link.click();
+        toast.success("Tree downloaded successfully!");
+      })
+      .catch(() => {
+        toast.error("Failed to download tree");
+      });
+  };
 
   return (
     <div ref={reactFlowWrapper} className="h-full w-full relative">
@@ -63,9 +93,19 @@ const TreeVisualizerContent = ({ nodes, edges }: TreeVisualizerProps) => {
                 return "#94a3b8";
             }
           }}
-          className="border-2 border-border"
+          className="border-2 border-border hidden md:block"
         />
       </ReactFlow>
+
+      <div className="absolute top-4 right-4 flex gap-2 z-10">
+        <button
+          className="btn"
+          onClick={onDownloadImage}
+          title="Download as Image"
+        >
+          <Download className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   );
 };
