@@ -63,21 +63,15 @@ export const JsonInput = ({ onGenerate, onClear }: JsonInputProps) => {
           value={jsonText}
           onChange={(e) => setJsonText(e.target.value)}
           placeholder="Enter JSON here..."
-          className="flex-1 p-2 border text-sm resize-none min-h-[400px]"
+          className="flex-1 p-2 focus:outline-none border text-sm resize-none min-h-[400px]"
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
       </div>
       <div className="flex gap-3">
-        <button
-          onClick={handleGenerate}
-          className="flex-1 cursor-pointer p-2 rounded-md bg-yellow-600 text-white hover:bg-yellow-500"
-        >
+        <button onClick={handleGenerate} className="flex-1 btn btn-primary">
           Generate Tree
         </button>
-        <button
-          onClick={handleClear}
-          className="cursor-pointer p-2 rounded-md bg-blue-600 text-white hover:bg-blue-500"
-        >
+        <button onClick={handleClear} className="btn btn-outline">
           Clear
         </button>
       </div>

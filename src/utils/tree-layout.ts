@@ -10,17 +10,29 @@ export const convertToFlowElements = (
   const nodes: FlowNode[] = [];
   const edges: FlowEdge[] = [];
 
+  const computeSubtreeWidth = (node: TreeNode): number => {
+    if (!node.children || node.children.length === 0) return HORIZONTAL_SPACING;
+    let totalWidth = 0;
+    node.children.forEach((child) => {
+      totalWidth += computeSubtreeWidth(child);
+    });
+    return Math.max(totalWidth, HORIZONTAL_SPACING);
+  };
+
   const calculatePositions = (
     node: TreeNode,
     depth: number,
-    offset: { x: number }
-  ): void => {
+    x: number
+  ): number => {
+    const subtreeWidth = computeSubtreeWidth(node);
+    const startX = x - subtreeWidth / 2;
+
     const isHighlighted = highlightedPath === node.path;
 
     nodes.push({
       id: node.id,
       type: "custom",
-      position: { x: offset.x, y: depth * VERTICAL_SPACING },
+      position: { x, y: depth * VERTICAL_SPACING },
       data: {
         label: node.label,
         value: node.value,
@@ -31,10 +43,11 @@ export const convertToFlowElements = (
     });
 
     if (node.children && node.children.length > 0) {
-      const childrenWidth = node.children.length * HORIZONTAL_SPACING;
-      let childX = offset.x - childrenWidth / 2 + HORIZONTAL_SPACING / 2;
-
+      let childX = startX;
       node.children.forEach((child) => {
+        const childWidth = computeSubtreeWidth(child);
+        const childCenter = childX + childWidth / 2;
+
         edges.push({
           id: `${node.id}-${child.id}`,
           source: node.id,
@@ -42,13 +55,14 @@ export const convertToFlowElements = (
           type: "smoothstep",
         });
 
-        calculatePositions(child, depth + 1, { x: childX });
-        childX += HORIZONTAL_SPACING;
+        calculatePositions(child, depth + 1, childCenter);
+        childX += childWidth;
       });
     }
+
+    return subtreeWidth;
   };
 
-  calculatePositions(tree, 0, { x: 400 });
-
+  calculatePositions(tree, 0, 400);
   return { nodes, edges };
 };

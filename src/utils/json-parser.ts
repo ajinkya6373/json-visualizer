@@ -1,6 +1,6 @@
 import type { NodeType, TreeNode } from "@/types/json-tree";
 
-export const parseJsonToTree = (jsonData: any, path = "$"): TreeNode => {
+export const parseJsonToTree = (jsonData: any, path = "root"): TreeNode => {
   const getNodeType = (value: any): NodeType => {
     if (value === null || value === undefined) return "primitive";
     if (Array.isArray(value)) return "array";

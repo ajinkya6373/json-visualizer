@@ -1,3 +1,105 @@
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    --color-primary: 34 150 243; 
+    --color-secondary: 99 102 241; 
 
+    --btn-text: 255 255 255;
+    --btn-bg: var(--color-primary);
+    --btn-border: var(--color-primary);
+
+    --node-object: 16 185 129;     
+    --node-array: 59 130 246;      
+    --node-primitive: 234 179 8;   
+    --node-highlight: 239 68 68;   
+  }
+
+  .dark {
+    --color-primary: 59 130 246; 
+    --color-secondary: 139 92 246;
+
+    --btn-text: 255 255 255;
+    --btn-bg: var(--color-primary);
+    --btn-border: var(--color-primary);
+
+    --node-object: 52 211 153;     
+    --node-array: 147 197 253;     
+    --node-primitive: 250 204 21;  
+    --node-highlight: 248 113 113; 
+  }
+}
+
+@layer components {
+  .btn {
+    @apply cursor-pointer inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none;
+  }
+
+  .btn-primary {
+    @apply bg-[rgb(var(--btn-bg))] text-[rgb(var(--btn-text))] border border-[rgb(var(--btn-border))] hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply bg-[rgb(var(--color-secondary))] text-white border border-[rgb(var(--color-secondary))] hover:opacity-90;
+  }
+
+  .btn-outline {
+    @apply border border-[rgb(var(--btn-border))] text-[rgb(var(--btn-bg))] bg-transparent hover:bg-[rgb(var(--btn-bg))] hover:text-[rgb(var(--btn-text))];
+  }
+
+  .bg-primary {
+    @apply bg-[rgb(var(--color-primary))];
+  }
+
+  .bg-secondary {
+    @apply bg-[rgb(var(--color-secondary))];
+  }
+
+  .text-primary {
+    @apply text-[rgb(var(--color-primary))];
+  }
+
+  .text-secondary {
+    @apply text-[rgb(var(--color-secondary))];
+  }
+
+
+    .bg-nodeObject {
+    @apply bg-[rgb(var(--node-object))];
+  }
+  .bg-nodeArray {
+    @apply bg-[rgb(var(--node-array))];
+  }
+  .bg-nodePrimitive {
+    @apply bg-[rgb(var(--node-primitive))];
+  }
+  .bg-nodeHighlight {
+    @apply bg-[rgb(var(--node-highlight))];
+  }
+
+  .border-nodeObject {
+    @apply border-[rgb(var(--node-object))];
+  }
+  .border-nodeArray {
+    @apply border-[rgb(var(--node-array))];
+  }
+  .border-nodePrimitive {
+    @apply border-[rgb(var(--node-primitive))];
+  }
+  .border-nodeHighlight {
+    @apply border-[rgb(var(--node-highlight))];
+  }
+
+  .text-nodeObject {
+    @apply text-[rgb(var(--node-object))];
+  }
+  .text-nodeArray {
+    @apply text-[rgb(var(--node-array))];
+  }
+  .text-nodePrimitive {
+    @apply text-[rgb(var(--node-primitive))];
+  }
+  .text-nodeHighlight {
+    @apply text-[rgb(var(--node-highlight))];
+  }
+}
