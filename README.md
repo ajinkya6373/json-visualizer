@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# JSON Tree Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, interactive web application for visualizing JSON data structures as hierarchical trees using React Flow.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Functionality
+- **JSON Input & Validation**: Paste or type JSON data with real-time validation
+- **Interactive Tree Visualization**: Hierarchical node-based visualization using React Flow
+- **Smart Search**: Search nodes by JSON path (e.g., `$.user.address.city`, `items[0].name`)
+- **Node Highlighting**: Automatically highlights and centers matched nodes
+- **Click to Copy**: Click any node to copy its JSON path to clipboard
 
-## React Compiler
+### Visual Features
+- **Dark/Light Mode**: Toggle between themes
+- **Responsive Design**: Works on all screen sizes
+- **Smooth Animations**: Professional transitions and hover effects
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Controls
+- **Zoom In/Out**: Precise zoom controls
+- **Fit View**: Automatically fit entire tree in viewport
+- **Pan & Drag**: Navigate large JSON structures easily
+- **Download**: Export tree as PNG image
+- **Clear/Reset**: Start fresh with one click
 
-## Expanding the ESLint configuration
+### UX Enhancements
+- **Node Tooltips**: Hover to see full path and value
+- **Mini Map**: Navigate large trees with ease
+- **Sample JSON**: Pre-loaded example to get started
+- **Toast Notifications**: Clear feedback for all actions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **React Flow** - Tree visualization
+- **Tailwind CSS** - Styling
+- **html-to-image** - Image export
+- **Sonner** - Toast notifications
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone the repository
+git clone <your-repo-url>
+
+# Navigate to project directory
+cd json-tree-visualizer
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Input JSON**: Paste or type your JSON data in the left panel
+2. **Generate Tree**: Click "Generate Tree" to visualize
+3. **Search**: Use the search bar to find specific paths (e.g., `$.user.name`)
+4. **Interact**: 
+   - Click nodes to copy their paths
+   - Hover for tooltips
+   - Use zoom controls to navigate
+5. **Export**: Download your tree as an image
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Example JSON Paths
+
+```
+$.user.address.city
+$.items[0].name
+$.data.users[2].email
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── JsonInput.tsx          # JSON input textarea
+│   ├── TreeVisualizer.tsx     # React Flow canvas
+│   ├── CustomNode.tsx         # Custom node component
+│   ├── SearchBar.tsx          # Search functionality
+│ 
+├── types/
+│   └── json-tree.ts           # TypeScript interfaces
+├── utils/
+│   ├── json-parser.ts         # JSON parsing logic
+│   └── tree-layout.ts         # Tree layout algorithm
+└── pages/
+    └── Index.tsx             # Main page
+    └── NotFound.tsx  
+```
+
+## Development
+
+```bash
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
