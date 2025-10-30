@@ -99,7 +99,7 @@ const TreeVisualizerContent = ({ nodes, edges }: TreeVisualizerProps) => {
 
       <div className="absolute top-4 right-4 flex gap-2 z-10">
         <button
-          className="btn"
+          className="btn btn-outline"
           onClick={onDownloadImage}
           title="Download as Image"
         >

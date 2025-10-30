@@ -13,6 +13,19 @@
     --node-array: 59 130 246;      
     --node-primitive: 234 179 8;   
     --node-highlight: 239 68 68;   
+    --edge-color: 148 163 184;
+    --gray-50: 249 250 251;
+    --gray-100: 243 244 246;
+    --gray-200: 229 231 235;
+    --gray-300: 209 213 219;
+    --gray-400: 156 163 175;
+    --gray-500: 107 114 128;
+    --gray-600: 75 85 99;
+    --gray-700: 55 65 81;
+    --gray-800: 31 41 55;
+    --gray-900: 17 24 39;
+    --white: 255 255 255;
+    --black: 0 0 0;
   }
 
   .dark {
@@ -27,24 +40,41 @@
     --node-array: 147 197 253;     
     --node-primitive: 250 204 21;  
     --node-highlight: 248 113 113; 
+    --edge-color: 203 213 225;
+    --gray-50: 31 41 55;
+    --gray-100: 55 65 81;
+    --gray-200: 75 85 99;
+    --gray-300: 107 114 128;
+    --gray-400: 156 163 175;
+    --gray-500: 209 213 219;
+    --gray-600: 229 231 235;
+    --gray-700: 243 244 246;
+    --gray-800: 249 250 251;
+    --gray-900: 255 255 255;
+    --white: 17 24 39;
+    --black: 255 255 255;
   }
 }
 
 @layer components {
   .btn {
-    @apply cursor-pointer inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none;
+    @apply cursor-pointer inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none shadow-sm hover:shadow-md;
   }
 
   .btn-primary {
-    @apply bg-[rgb(var(--btn-bg))] text-[rgb(var(--btn-text))] border border-[rgb(var(--btn-border))] hover:opacity-90;
+    @apply bg-[rgb(var(--btn-bg))] text-[rgb(var(--btn-text))] border border-[rgb(var(--btn-border))] hover:opacity-90 shadow-md hover:shadow-lg;
   }
 
   .btn-secondary {
-    @apply bg-[rgb(var(--color-secondary))] text-white border border-[rgb(var(--color-secondary))] hover:opacity-90;
+    @apply bg-[rgb(var(--color-secondary))] text-white border border-[rgb(var(--color-secondary))] hover:opacity-90 shadow-md hover:shadow-lg;
   }
 
   .btn-outline {
-    @apply border border-[rgb(var(--btn-border))] text-[rgb(var(--btn-bg))] bg-transparent hover:bg-[rgb(var(--btn-bg))] hover:text-[rgb(var(--btn-text))];
+    @apply border border-[rgb(var(--btn-border))] text-[rgb(var(--btn-bg))] bg-transparent hover:bg-[rgb(var(--btn-bg))] hover:text-[rgb(var(--btn-text))] shadow-sm hover:shadow-md;
+  }
+
+  .btn-theme {
+    @apply px-4 py-2 rounded-lg border border-[rgb(var(--gray-300))] dark:border-[rgb(var(--gray-600))] bg-[rgb(var(--white))] dark:bg-[rgb(var(--gray-800))] text-[rgb(var(--gray-900))] dark:text-[rgb(var(--gray-100))] hover:bg-[rgb(var(--gray-50))] dark:hover:bg-[rgb(var(--gray-700))] transition-all duration-200 shadow-sm hover:shadow-md;
   }
 
   .bg-primary {
@@ -61,6 +91,22 @@
 
   .text-secondary {
     @apply text-[rgb(var(--color-secondary))];
+  }
+
+  .card {
+    @apply bg-[rgb(var(--white))] dark:bg-[rgb(var(--gray-800))] border border-[rgb(var(--gray-200))] dark:border-[rgb(var(--gray-700))] rounded-lg shadow-md;
+  }
+
+  .card-elevated {
+    @apply bg-[rgb(var(--white))] dark:bg-[rgb(var(--gray-800))] border border-[rgb(var(--gray-200))] dark:border-[rgb(var(--gray-700))] rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-[rgb(var(--gray-300))] dark:border-[rgb(var(--gray-600))] rounded-lg bg-[rgb(var(--white))] dark:bg-[rgb(var(--gray-700))] text-[rgb(var(--gray-900))] dark:text-[rgb(var(--gray-100))] placeholder-[rgb(var(--gray-500))] dark:placeholder-[rgb(var(--gray-400))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))] focus:border-transparent shadow-sm;
+  }
+
+  .textarea-field {
+    @apply w-full px-3 py-2 border border-[rgb(var(--gray-300))] dark:border-[rgb(var(--gray-600))] rounded-lg bg-[rgb(var(--white))] dark:bg-[rgb(var(--gray-700))] text-[rgb(var(--gray-900))] dark:text-[rgb(var(--gray-100))] placeholder-[rgb(var(--gray-500))] dark:placeholder-[rgb(var(--gray-400))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))] focus:border-transparent shadow-sm resize-none;
   }
 
 

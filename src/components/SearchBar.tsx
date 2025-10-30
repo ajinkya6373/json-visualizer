@@ -27,7 +27,7 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         placeholder="$.user.address.city or items[0].name"
-        className="flex p-2 w-full rounded-md border focus:outline-none text-sm"
+        className="input-field text-sm"
       />
       <button onClick={handleSearch} className="btn btn-secondary">
         Search

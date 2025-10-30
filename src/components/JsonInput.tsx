@@ -58,14 +58,14 @@ export const JsonInput = ({ onGenerate, onClear }: JsonInputProps) => {
   return (
     <div className="flex flex-col gap-4 h-full">
       <div className="flex-1 flex flex-col gap-2">
-        <label className="text-sm font-medium">Paste or type JSON data</label>
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Paste or type JSON data</label>
         <textarea
           value={jsonText}
           onChange={(e) => setJsonText(e.target.value)}
           placeholder="Enter JSON here..."
-          className="flex-1 p-2 focus:outline-none border text-sm resize-none min-h-[400px]"
+          className="textarea-field flex-1 text-sm min-h-[400px]"
         />
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-red-500 dark:text-red-400">{error}</p>}
       </div>
       <div className="flex gap-3">
         <button onClick={handleGenerate} className="flex-1 btn btn-primary">

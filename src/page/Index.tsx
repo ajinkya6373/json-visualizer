@@ -4,13 +4,32 @@ import { TreeVisualizer } from "@/components/TreeVisualizer";
 import type { FlowEdge, FlowNode } from "@/types/json-tree";
 import { findNodeByPath, parseJsonToTree } from "@/utils/json-parser";
 import { convertToFlowElements } from "@/utils/tree-layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
+const getInitialDarkMode = () => {
+  const stored = localStorage.getItem("theme");
+  return stored ? stored === "dark" : true;
+};
 
 const Index = () => {
   const [flowNodes, setFlowNodes] = useState<FlowNode[]>([]);
   const [flowEdges, setFlowEdges] = useState<FlowEdge[]>([]);
   const [currentTree, setCurrentTree] = useState<any>(null);
+
+  const [darkMode, setDarkMode] = useState(getInitialDarkMode);
+
+  useEffect(() => {
+    if (darkMode) {
+      console.log("Enabling dark mode");
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      console.log("Enabling dark mode");
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const handleGenerateTree = (jsonData: any) => {
     try {
@@ -51,26 +70,34 @@ const Index = () => {
     setCurrentTree(null);
   };
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full bg-[rgb(var(--gray-50))] dark:bg-[rgb(var(--gray-900))] transition-colors duration-200">
       <div className="mx-auto p-6 h-screen flex flex-col">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold">JSON Tree Visualizer</h1>
+          <h1 className="text-3xl font-bold text-[rgb(var(--gray-900))] dark:text-[rgb(var(--gray-100))]">
+            JSON Tree Visualizer
+          </h1>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="btn-theme btn"
+          >
+            {darkMode ? "🌙 Dark" : "☀️ Light"}
+          </button>
         </div>
 
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-scroll">
-          <div className="bg-blue-100 rounded-lg p-6 border border-border">
+          <div className="card-elevated p-6">
             <JsonInput onGenerate={handleGenerateTree} onClear={handleClear} />
           </div>
 
-          <div className="rounded-lg border border-border flex flex-col overflow-hidden min-h-[400px]">
-            <div className="p-4 border-b border-border">
+          <div className="card flex flex-col overflow-hidden min-h-[400px]">
+            <div className="p-4 border-b border-[rgb(var(--gray-200))] dark:border-[rgb(var(--gray-700))]">
               <SearchBar onSearch={handleSearch} />
             </div>
             <div className="flex-1 relative">
               {flowNodes.length > 0 ? (
                 <TreeVisualizer nodes={flowNodes} edges={flowEdges} />
               ) : (
-                <div className="h-full flex items-center justify-center text-muted-foreground">
+                <div className="h-full flex items-center justify-center text-[rgb(var(--gray-500))] dark:text-[rgb(var(--gray-400))]">
                   <p>Generate a tree to visualize JSON structure</p>
                 </div>
               )}

@@ -42,20 +42,20 @@ export const CustomNode = memo(({ data }: NodeProps<CustomNodeData>) => {
   return (
     <div
       onClick={handleClick}
-      className={`px-4 py-2 rounded-lg border-2 shadow-md cursor-pointer transition-all hover:scale-105 hover:shadow-lg ${getNodeColor(
+      className={`px-4 py-3 rounded-xl border-2 shadow-lg cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95 ${getNodeColor(
         nodeType,
         isHighlighted || false
       )}`}
       title={`${path}\n${value !== undefined ? `Value: ${value}` : ""}`}
     >
-      <Handle type="target" position={Position.Top} className="w-2 h-2" />
+      <Handle type="target" position={Position.Top} className="w-3 h-3 bg-white/20 border-2 border-white/40" />
       <div className="text-sm font-semibold">
         {label}
         {shouldShowValue && (
           <span className="ml-2 font-normal opacity-90">: {displayValue}</span>
         )}
       </div>
-      <Handle type="source" position={Position.Bottom} className="w-2 h-2" />
+      <Handle type="source" position={Position.Bottom} className="w-3 h-3 bg-white/20 border-2 border-white/40" />
     </div>
   );
 });
